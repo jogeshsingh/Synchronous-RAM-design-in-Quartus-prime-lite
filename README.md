@@ -1,2 +1,2 @@
-# Synchronous-RAM-design-in-Quartus-prime-lite
-Synchronous RAM is basically used in accessing and writing into the memory , this is an important part of any processor architecture that could be used to read and write the data synchronously . The above project is designed using Verilog HDLV
+# Single Port Synchronous-RAM-design-in-Quartus-prime-lite
+Synchronous RAM is basically used in accessing the data from internal processes and writing the same data back into the memory at same clock rate and phase , SRAM is an important part of any processor architecture that could be used to read and write the data synchronously . The above project is designed using Verilog HDL and simulated using MODELSIM .
