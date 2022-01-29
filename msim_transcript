@@ -1,0 +1,54 @@
+# Reading pref.tcl
+# do SRAM_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Modifying F:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+F:/intelFPGA_lite/20.1/Examples/SRAM {F:/intelFPGA_lite/20.1/Examples/SRAM/accum.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 10:44:56 on Jan 29,2022
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+F:/intelFPGA_lite/20.1/Examples/SRAM" F:/intelFPGA_lite/20.1/Examples/SRAM/accum.v 
+# -- Compiling module accum
+# 
+# Top level modules:
+# 	accum
+# End time: 10:44:57 on Jan 29,2022, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# 
+# vlog -vlog01compat -work work +incdir+F:/intelFPGA_lite/20.1/Examples/SRAM {F:/intelFPGA_lite/20.1/Examples/SRAM/SRAM_V_tb.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 10:44:57 on Jan 29,2022
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+F:/intelFPGA_lite/20.1/Examples/SRAM" F:/intelFPGA_lite/20.1/Examples/SRAM/SRAM_V_tb.v 
+# -- Compiling module SRAM_V_tb
+# 
+# Top level modules:
+# 	SRAM_V_tb
+# End time: 10:44:57 on Jan 29,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L fiftyfivenm_ver -L rtl_work -L work -voptargs="+acc"  SRAM_V_tb
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L fiftyfivenm_ver -L rtl_work -L work -voptargs=""+acc"" SRAM_V_tb 
+# Start time: 10:44:58 on Jan 29,2022
+# Loading work.SRAM_V_tb
+# ** Error: (vsim-3033) Instantiation of 'SRAM_V' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /SRAM_V_tb File: F:/intelFPGA_lite/20.1/Examples/SRAM/SRAM_V_tb.v Line: 13
+#         Searched libraries:
+#             F:/intelFPGA_lite/20.1/modelsim_ase/altera/verilog/altera
+#             F:/intelFPGA_lite/20.1/modelsim_ase/altera/verilog/220model
+#             F:/intelFPGA_lite/20.1/modelsim_ase/altera/verilog/sgate
+#             F:/intelFPGA_lite/20.1/modelsim_ase/altera/verilog/altera_mf
+#             F:/intelFPGA_lite/20.1/modelsim_ase/altera/verilog/altera_lnsim
+#             F:/intelFPGA_lite/20.1/modelsim_ase/altera/verilog/fiftyfivenm
+#             F:/intelFPGA_lite/20.1/Examples/SRAM/simulation/modelsim/rtl_work
+#             F:/intelFPGA_lite/20.1/Examples/SRAM/simulation/modelsim/rtl_work
+# Error loading design
+# Error: Error loading design
+#        Pausing macro execution
+# MACRO ./SRAM_run_msim_rtl_verilog.do PAUSED at line 12
+# End time: 10:45:37 on Jan 29,2022, Elapsed time: 0:00:39
+# Errors: 1, Warnings: 0

@@ -1,0 +1,2826 @@
+// Copyright (C) 2020  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and any partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details, at
+// https://fpgasoftware.intel.com/eula.
+
+// VENDOR "Altera"
+// PROGRAM "Quartus Prime"
+// VERSION "Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
+
+// DATE "01/20/2022 22:25:43"
+
+// 
+// Device: Altera 10M50DAF484C6GES Package FBGA484
+// 
+
+// 
+// This Verilog file should be used for ModelSim-Altera (Verilog) only
+// 
+
+`timescale 1 ps/ 1 ps
+
+module accum (
+	clock0,
+	dataa,
+	datab,
+	result);
+input 	clock0;
+input 	[15:0] dataa;
+input 	[15:0] datab;
+output 	[32:0] result;
+
+// Design Ports Information
+// result[0]	=>  Location: PIN_V4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[1]	=>  Location: PIN_U6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[2]	=>  Location: PIN_W6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[3]	=>  Location: PIN_Y1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[4]	=>  Location: PIN_Y2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[5]	=>  Location: PIN_U7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[6]	=>  Location: PIN_V5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[7]	=>  Location: PIN_A3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[8]	=>  Location: PIN_AA2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[9]	=>  Location: PIN_P11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[10]	=>  Location: PIN_V11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[11]	=>  Location: PIN_V12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[12]	=>  Location: PIN_T5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[13]	=>  Location: PIN_Y8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[14]	=>  Location: PIN_W4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[15]	=>  Location: PIN_P9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[16]	=>  Location: PIN_W3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[17]	=>  Location: PIN_AA9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[18]	=>  Location: PIN_V8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[19]	=>  Location: PIN_T6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[20]	=>  Location: PIN_Y5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[21]	=>  Location: PIN_AA1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[22]	=>  Location: PIN_B4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[23]	=>  Location: PIN_R9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[24]	=>  Location: PIN_AB4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[25]	=>  Location: PIN_R10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[26]	=>  Location: PIN_AA3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[27]	=>  Location: PIN_P10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[28]	=>  Location: PIN_W9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[29]	=>  Location: PIN_AB3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[30]	=>  Location: PIN_AA5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[31]	=>  Location: PIN_V9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// result[32]	=>  Location: PIN_AB2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// clock0	=>  Location: PIN_M8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[0]	=>  Location: PIN_AB7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[1]	=>  Location: PIN_Y11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[2]	=>  Location: PIN_AA8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[3]	=>  Location: PIN_Y7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[4]	=>  Location: PIN_AA6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[5]	=>  Location: PIN_Y10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[6]	=>  Location: PIN_C6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[7]	=>  Location: PIN_R12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[8]	=>  Location: PIN_AB11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[9]	=>  Location: PIN_AA7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[10]	=>  Location: PIN_W8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[11]	=>  Location: PIN_AA10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[12]	=>  Location: PIN_Y4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[13]	=>  Location: PIN_AA11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[14]	=>  Location: PIN_W7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// dataa[15]	=>  Location: PIN_W11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[0]	=>  Location: PIN_AA12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[1]	=>  Location: PIN_P12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[2]	=>  Location: PIN_Y6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[3]	=>  Location: PIN_AB6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[4]	=>  Location: PIN_AB9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[5]	=>  Location: PIN_AB13,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[6]	=>  Location: PIN_AB12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[7]	=>  Location: PIN_AB5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[8]	=>  Location: PIN_W10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[9]	=>  Location: PIN_AB8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[10]	=>  Location: PIN_AB10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[11]	=>  Location: PIN_R11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[12]	=>  Location: PIN_W12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[13]	=>  Location: PIN_V7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[14]	=>  Location: PIN_V10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// datab[15]	=>  Location: PIN_Y3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+
+
+wire gnd;
+wire vcc;
+wire unknown;
+
+assign gnd = 1'b0;
+assign vcc = 1'b1;
+assign unknown = 1'bx;
+
+tri1 devclrn;
+tri1 devpor;
+tri1 devoe;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~0 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~1 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~2 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~3 ;
+wire \~QUARTUS_CREATED_GND~I_combout ;
+wire \~QUARTUS_CREATED_UNVM~~busy ;
+wire \~QUARTUS_CREATED_ADC1~~eoc ;
+wire \~QUARTUS_CREATED_ADC2~~eoc ;
+wire \result[0]~output_o ;
+wire \result[1]~output_o ;
+wire \result[2]~output_o ;
+wire \result[3]~output_o ;
+wire \result[4]~output_o ;
+wire \result[5]~output_o ;
+wire \result[6]~output_o ;
+wire \result[7]~output_o ;
+wire \result[8]~output_o ;
+wire \result[9]~output_o ;
+wire \result[10]~output_o ;
+wire \result[11]~output_o ;
+wire \result[12]~output_o ;
+wire \result[13]~output_o ;
+wire \result[14]~output_o ;
+wire \result[15]~output_o ;
+wire \result[16]~output_o ;
+wire \result[17]~output_o ;
+wire \result[18]~output_o ;
+wire \result[19]~output_o ;
+wire \result[20]~output_o ;
+wire \result[21]~output_o ;
+wire \result[22]~output_o ;
+wire \result[23]~output_o ;
+wire \result[24]~output_o ;
+wire \result[25]~output_o ;
+wire \result[26]~output_o ;
+wire \result[27]~output_o ;
+wire \result[28]~output_o ;
+wire \result[29]~output_o ;
+wire \result[30]~output_o ;
+wire \result[31]~output_o ;
+wire \result[32]~output_o ;
+wire \clock0~input_o ;
+wire \clock0~inputclkctrl_outclk ;
+wire \dataa[0]~input_o ;
+wire \dataa[1]~input_o ;
+wire \dataa[2]~input_o ;
+wire \dataa[3]~input_o ;
+wire \dataa[4]~input_o ;
+wire \dataa[5]~input_o ;
+wire \dataa[6]~input_o ;
+wire \dataa[7]~input_o ;
+wire \dataa[8]~input_o ;
+wire \dataa[9]~input_o ;
+wire \dataa[10]~input_o ;
+wire \dataa[11]~input_o ;
+wire \dataa[12]~input_o ;
+wire \dataa[13]~input_o ;
+wire \dataa[14]~input_o ;
+wire \dataa[15]~input_o ;
+wire \datab[0]~input_o ;
+wire \datab[1]~input_o ;
+wire \datab[2]~input_o ;
+wire \datab[3]~input_o ;
+wire \datab[4]~input_o ;
+wire \datab[5]~input_o ;
+wire \datab[6]~input_o ;
+wire \datab[7]~input_o ;
+wire \datab[8]~input_o ;
+wire \datab[9]~input_o ;
+wire \datab[10]~input_o ;
+wire \datab[11]~input_o ;
+wire \datab[12]~input_o ;
+wire \datab[13]~input_o ;
+wire \datab[14]~input_o ;
+wire \datab[15]~input_o ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~dataout ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT1 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT2 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT3 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT4 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT5 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT6 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT7 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT8 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT9 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT10 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT11 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT12 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT13 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT14 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT15 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT16 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT17 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT18 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT19 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT20 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT21 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT22 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT23 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT24 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT25 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT26 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT27 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT28 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT29 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT30 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT31 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~4 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~5 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~6 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~7 ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~dataout ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT1 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT2 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT3 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT4 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT5 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT6 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT7 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT8 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT9 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT10 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT11 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT12 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT13 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT14 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT15 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT16 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT17 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT18 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT19 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT20 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT21 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT22 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT23 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT24 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT25 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT26 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT27 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT28 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT29 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT30 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29]~COUT ;
+wire \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT31 ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT ;
+wire \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[31]~COUT ;
+wire [32:0] \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella ;
+wire [32:0] \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa ;
+
+wire [35:0] \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus ;
+wire [35:0] \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus ;
+
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~0  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [0];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~1  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [1];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~2  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [2];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~3  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [3];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~dataout  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [4];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT1  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [5];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT2  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [6];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT3  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [7];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT4  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [8];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT5  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [9];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT6  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [10];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT7  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [11];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT8  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [12];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT9  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [13];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT10  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [14];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT11  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [15];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT12  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [16];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT13  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [17];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT14  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [18];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT15  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [19];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT16  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [20];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT17  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [21];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT18  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [22];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT19  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [23];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT20  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [24];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT21  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [25];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT22  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [26];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT23  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [27];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT24  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [28];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT25  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [29];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT26  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [30];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT27  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [31];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT28  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [32];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT29  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [33];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT30  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [34];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT31  = \altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus [35];
+
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~4  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [0];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~5  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [1];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~6  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [2];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~7  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [3];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~dataout  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [4];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT1  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [5];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT2  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [6];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT3  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [7];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT4  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [8];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT5  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [9];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT6  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [10];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT7  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [11];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT8  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [12];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT9  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [13];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT10  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [14];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT11  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [15];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT12  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [16];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT13  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [17];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT14  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [18];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT15  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [19];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT16  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [20];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT17  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [21];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT18  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [22];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT19  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [23];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT20  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [24];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT21  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [25];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT22  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [26];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT23  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [27];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT24  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [28];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT25  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [29];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT26  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [30];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT27  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [31];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT28  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [32];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT29  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [33];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT30  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [34];
+assign \altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT31  = \altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus [35];
+
+hard_block auto_generated_inst(
+	.devpor(devpor),
+	.devclrn(devclrn),
+	.devoe(devoe));
+
+// Location: LCCOMB_X44_Y41_N16
+fiftyfivenm_lcell_comb \~QUARTUS_CREATED_GND~I (
+// Equation(s):
+// \~QUARTUS_CREATED_GND~I_combout  = GND
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(gnd),
+	.cin(gnd),
+	.combout(\~QUARTUS_CREATED_GND~I_combout ),
+	.cout());
+// synopsys translate_off
+defparam \~QUARTUS_CREATED_GND~I .lut_mask = 16'h0000;
+defparam \~QUARTUS_CREATED_GND~I .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: IOOBUF_X14_Y0_N16
+fiftyfivenm_io_obuf \result[0]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [0]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[0]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[0]~output .bus_hold = "false";
+defparam \result[0]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X16_Y0_N9
+fiftyfivenm_io_obuf \result[1]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [1]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[1]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[1]~output .bus_hold = "false";
+defparam \result[1]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X16_Y0_N30
+fiftyfivenm_io_obuf \result[2]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [2]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[2]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[2]~output .bus_hold = "false";
+defparam \result[2]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X16_Y0_N23
+fiftyfivenm_io_obuf \result[3]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [3]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[3]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[3]~output .bus_hold = "false";
+defparam \result[3]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X16_Y0_N16
+fiftyfivenm_io_obuf \result[4]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [4]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[4]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[4]~output .bus_hold = "false";
+defparam \result[4]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X16_Y0_N2
+fiftyfivenm_io_obuf \result[5]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [5]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[5]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[5]~output .bus_hold = "false";
+defparam \result[5]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X14_Y0_N9
+fiftyfivenm_io_obuf \result[6]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [6]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[6]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[6]~output .bus_hold = "false";
+defparam \result[6]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X26_Y39_N9
+fiftyfivenm_io_obuf \result[7]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [7]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[7]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[7]~output .bus_hold = "false";
+defparam \result[7]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X18_Y0_N23
+fiftyfivenm_io_obuf \result[8]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [8]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[8]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[8]~output .bus_hold = "false";
+defparam \result[8]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X34_Y0_N30
+fiftyfivenm_io_obuf \result[9]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [9]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[9]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[9]~output .bus_hold = "false";
+defparam \result[9]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X38_Y0_N30
+fiftyfivenm_io_obuf \result[10]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [10]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[10]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[10]~output .bus_hold = "false";
+defparam \result[10]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X38_Y0_N23
+fiftyfivenm_io_obuf \result[11]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [11]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[11]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[11]~output .bus_hold = "false";
+defparam \result[11]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y3_N16
+fiftyfivenm_io_obuf \result[12]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [12]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[12]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[12]~output .bus_hold = "false";
+defparam \result[12]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X20_Y0_N2
+fiftyfivenm_io_obuf \result[13]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [13]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[13]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[13]~output .bus_hold = "false";
+defparam \result[13]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X18_Y0_N16
+fiftyfivenm_io_obuf \result[14]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [14]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[14]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[14]~output .bus_hold = "false";
+defparam \result[14]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X22_Y0_N23
+fiftyfivenm_io_obuf \result[15]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [15]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[15]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[15]~output .bus_hold = "false";
+defparam \result[15]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X18_Y0_N9
+fiftyfivenm_io_obuf \result[16]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [16]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[16]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[16]~output .bus_hold = "false";
+defparam \result[16]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X34_Y0_N23
+fiftyfivenm_io_obuf \result[17]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [17]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[17]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[17]~output .bus_hold = "false";
+defparam \result[17]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X20_Y0_N16
+fiftyfivenm_io_obuf \result[18]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [18]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[18]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[18]~output .bus_hold = "false";
+defparam \result[18]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X0_Y3_N23
+fiftyfivenm_io_obuf \result[19]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [19]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[19]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[19]~output .bus_hold = "false";
+defparam \result[19]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X18_Y0_N2
+fiftyfivenm_io_obuf \result[20]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [20]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[20]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[20]~output .bus_hold = "false";
+defparam \result[20]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X18_Y0_N30
+fiftyfivenm_io_obuf \result[21]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [21]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[21]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[21]~output .bus_hold = "false";
+defparam \result[21]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X26_Y39_N23
+fiftyfivenm_io_obuf \result[22]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [22]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[22]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[22]~output .bus_hold = "false";
+defparam \result[22]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X22_Y0_N30
+fiftyfivenm_io_obuf \result[23]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [23]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[23]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[23]~output .bus_hold = "false";
+defparam \result[23]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X26_Y0_N23
+fiftyfivenm_io_obuf \result[24]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [24]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[24]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[24]~output .bus_hold = "false";
+defparam \result[24]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X26_Y0_N16
+fiftyfivenm_io_obuf \result[25]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [25]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[25]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[25]~output .bus_hold = "false";
+defparam \result[25]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X26_Y0_N30
+fiftyfivenm_io_obuf \result[26]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [26]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[26]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[26]~output .bus_hold = "false";
+defparam \result[26]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X26_Y0_N9
+fiftyfivenm_io_obuf \result[27]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [27]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[27]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[27]~output .bus_hold = "false";
+defparam \result[27]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X22_Y0_N2
+fiftyfivenm_io_obuf \result[28]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [28]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[28]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[28]~output .bus_hold = "false";
+defparam \result[28]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X22_Y0_N9
+fiftyfivenm_io_obuf \result[29]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [29]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[29]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[29]~output .bus_hold = "false";
+defparam \result[29]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X26_Y0_N2
+fiftyfivenm_io_obuf \result[30]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [30]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[30]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[30]~output .bus_hold = "false";
+defparam \result[30]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X31_Y0_N30
+fiftyfivenm_io_obuf \result[31]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [31]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[31]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[31]~output .bus_hold = "false";
+defparam \result[31]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X22_Y0_N16
+fiftyfivenm_io_obuf \result[32]~output (
+	.i(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [32]),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\result[32]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \result[32]~output .bus_hold = "false";
+defparam \result[32]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOIBUF_X0_Y18_N15
+fiftyfivenm_io_ibuf \clock0~input (
+	.i(clock0),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\clock0~input_o ));
+// synopsys translate_off
+defparam \clock0~input .bus_hold = "false";
+defparam \clock0~input .listen_to_nsleep_signal = "false";
+defparam \clock0~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: CLKCTRL_G3
+fiftyfivenm_clkctrl \clock0~inputclkctrl (
+	.ena(vcc),
+	.inclk({vcc,vcc,vcc,\clock0~input_o }),
+	.clkselect(2'b00),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.outclk(\clock0~inputclkctrl_outclk ));
+// synopsys translate_off
+defparam \clock0~inputclkctrl .clock_type = "global clock";
+defparam \clock0~inputclkctrl .ena_register_mode = "none";
+// synopsys translate_on
+
+// Location: IOIBUF_X29_Y0_N1
+fiftyfivenm_io_ibuf \dataa[0]~input (
+	.i(dataa[0]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[0]~input_o ));
+// synopsys translate_off
+defparam \dataa[0]~input .bus_hold = "false";
+defparam \dataa[0]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[0]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X36_Y0_N1
+fiftyfivenm_io_ibuf \dataa[1]~input (
+	.i(dataa[1]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[1]~input_o ));
+// synopsys translate_off
+defparam \dataa[1]~input .bus_hold = "false";
+defparam \dataa[1]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[1]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X31_Y0_N15
+fiftyfivenm_io_ibuf \dataa[2]~input (
+	.i(dataa[2]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[2]~input_o ));
+// synopsys translate_off
+defparam \dataa[2]~input .bus_hold = "false";
+defparam \dataa[2]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[2]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X20_Y0_N8
+fiftyfivenm_io_ibuf \dataa[3]~input (
+	.i(dataa[3]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[3]~input_o ));
+// synopsys translate_off
+defparam \dataa[3]~input .bus_hold = "false";
+defparam \dataa[3]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[3]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X29_Y0_N22
+fiftyfivenm_io_ibuf \dataa[4]~input (
+	.i(dataa[4]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[4]~input_o ));
+// synopsys translate_off
+defparam \dataa[4]~input .bus_hold = "false";
+defparam \dataa[4]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[4]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X34_Y0_N8
+fiftyfivenm_io_ibuf \dataa[5]~input (
+	.i(dataa[5]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[5]~input_o ));
+// synopsys translate_off
+defparam \dataa[5]~input .bus_hold = "false";
+defparam \dataa[5]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[5]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X29_Y39_N8
+fiftyfivenm_io_ibuf \dataa[6]~input (
+	.i(dataa[6]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[6]~input_o ));
+// synopsys translate_off
+defparam \dataa[6]~input .bus_hold = "false";
+defparam \dataa[6]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[6]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X38_Y0_N1
+fiftyfivenm_io_ibuf \dataa[7]~input (
+	.i(dataa[7]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[7]~input_o ));
+// synopsys translate_off
+defparam \dataa[7]~input .bus_hold = "false";
+defparam \dataa[7]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[7]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X38_Y0_N8
+fiftyfivenm_io_ibuf \dataa[8]~input (
+	.i(dataa[8]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[8]~input_o ));
+// synopsys translate_off
+defparam \dataa[8]~input .bus_hold = "false";
+defparam \dataa[8]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[8]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X29_Y0_N15
+fiftyfivenm_io_ibuf \dataa[9]~input (
+	.i(dataa[9]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[9]~input_o ));
+// synopsys translate_off
+defparam \dataa[9]~input .bus_hold = "false";
+defparam \dataa[9]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[9]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X24_Y0_N1
+fiftyfivenm_io_ibuf \dataa[10]~input (
+	.i(dataa[10]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[10]~input_o ));
+// synopsys translate_off
+defparam \dataa[10]~input .bus_hold = "false";
+defparam \dataa[10]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[10]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X34_Y0_N1
+fiftyfivenm_io_ibuf \dataa[11]~input (
+	.i(dataa[11]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[11]~input_o ));
+// synopsys translate_off
+defparam \dataa[11]~input .bus_hold = "false";
+defparam \dataa[11]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[11]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X24_Y0_N15
+fiftyfivenm_io_ibuf \dataa[12]~input (
+	.i(dataa[12]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[12]~input_o ));
+// synopsys translate_off
+defparam \dataa[12]~input .bus_hold = "false";
+defparam \dataa[12]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[12]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X40_Y0_N8
+fiftyfivenm_io_ibuf \dataa[13]~input (
+	.i(dataa[13]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[13]~input_o ));
+// synopsys translate_off
+defparam \dataa[13]~input .bus_hold = "false";
+defparam \dataa[13]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[13]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X24_Y0_N8
+fiftyfivenm_io_ibuf \dataa[14]~input (
+	.i(dataa[14]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[14]~input_o ));
+// synopsys translate_off
+defparam \dataa[14]~input .bus_hold = "false";
+defparam \dataa[14]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[14]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X36_Y0_N8
+fiftyfivenm_io_ibuf \dataa[15]~input (
+	.i(dataa[15]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\dataa[15]~input_o ));
+// synopsys translate_off
+defparam \dataa[15]~input .bus_hold = "false";
+defparam \dataa[15]~input .listen_to_nsleep_signal = "false";
+defparam \dataa[15]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X40_Y0_N1
+fiftyfivenm_io_ibuf \datab[0]~input (
+	.i(datab[0]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[0]~input_o ));
+// synopsys translate_off
+defparam \datab[0]~input .bus_hold = "false";
+defparam \datab[0]~input .listen_to_nsleep_signal = "false";
+defparam \datab[0]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X40_Y0_N29
+fiftyfivenm_io_ibuf \datab[1]~input (
+	.i(datab[1]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[1]~input_o ));
+// synopsys translate_off
+defparam \datab[1]~input .bus_hold = "false";
+defparam \datab[1]~input .listen_to_nsleep_signal = "false";
+defparam \datab[1]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X20_Y0_N29
+fiftyfivenm_io_ibuf \datab[2]~input (
+	.i(datab[2]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[2]~input_o ));
+// synopsys translate_off
+defparam \datab[2]~input .bus_hold = "false";
+defparam \datab[2]~input .listen_to_nsleep_signal = "false";
+defparam \datab[2]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X29_Y0_N8
+fiftyfivenm_io_ibuf \datab[3]~input (
+	.i(datab[3]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[3]~input_o ));
+// synopsys translate_off
+defparam \datab[3]~input .bus_hold = "false";
+defparam \datab[3]~input .listen_to_nsleep_signal = "false";
+defparam \datab[3]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X34_Y0_N15
+fiftyfivenm_io_ibuf \datab[4]~input (
+	.i(datab[4]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[4]~input_o ));
+// synopsys translate_off
+defparam \datab[4]~input .bus_hold = "false";
+defparam \datab[4]~input .listen_to_nsleep_signal = "false";
+defparam \datab[4]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X40_Y0_N15
+fiftyfivenm_io_ibuf \datab[5]~input (
+	.i(datab[5]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[5]~input_o ));
+// synopsys translate_off
+defparam \datab[5]~input .bus_hold = "false";
+defparam \datab[5]~input .listen_to_nsleep_signal = "false";
+defparam \datab[5]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X40_Y0_N22
+fiftyfivenm_io_ibuf \datab[6]~input (
+	.i(datab[6]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[6]~input_o ));
+// synopsys translate_off
+defparam \datab[6]~input .bus_hold = "false";
+defparam \datab[6]~input .listen_to_nsleep_signal = "false";
+defparam \datab[6]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X29_Y0_N29
+fiftyfivenm_io_ibuf \datab[7]~input (
+	.i(datab[7]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[7]~input_o ));
+// synopsys translate_off
+defparam \datab[7]~input .bus_hold = "false";
+defparam \datab[7]~input .listen_to_nsleep_signal = "false";
+defparam \datab[7]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X24_Y0_N29
+fiftyfivenm_io_ibuf \datab[8]~input (
+	.i(datab[8]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[8]~input_o ));
+// synopsys translate_off
+defparam \datab[8]~input .bus_hold = "false";
+defparam \datab[8]~input .listen_to_nsleep_signal = "false";
+defparam \datab[8]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X31_Y0_N8
+fiftyfivenm_io_ibuf \datab[9]~input (
+	.i(datab[9]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[9]~input_o ));
+// synopsys translate_off
+defparam \datab[9]~input .bus_hold = "false";
+defparam \datab[9]~input .listen_to_nsleep_signal = "false";
+defparam \datab[9]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X38_Y0_N15
+fiftyfivenm_io_ibuf \datab[10]~input (
+	.i(datab[10]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[10]~input_o ));
+// synopsys translate_off
+defparam \datab[10]~input .bus_hold = "false";
+defparam \datab[10]~input .listen_to_nsleep_signal = "false";
+defparam \datab[10]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X31_Y0_N1
+fiftyfivenm_io_ibuf \datab[11]~input (
+	.i(datab[11]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[11]~input_o ));
+// synopsys translate_off
+defparam \datab[11]~input .bus_hold = "false";
+defparam \datab[11]~input .listen_to_nsleep_signal = "false";
+defparam \datab[11]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X46_Y0_N8
+fiftyfivenm_io_ibuf \datab[12]~input (
+	.i(datab[12]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[12]~input_o ));
+// synopsys translate_off
+defparam \datab[12]~input .bus_hold = "false";
+defparam \datab[12]~input .listen_to_nsleep_signal = "false";
+defparam \datab[12]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X20_Y0_N22
+fiftyfivenm_io_ibuf \datab[13]~input (
+	.i(datab[13]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[13]~input_o ));
+// synopsys translate_off
+defparam \datab[13]~input .bus_hold = "false";
+defparam \datab[13]~input .listen_to_nsleep_signal = "false";
+defparam \datab[13]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X31_Y0_N22
+fiftyfivenm_io_ibuf \datab[14]~input (
+	.i(datab[14]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[14]~input_o ));
+// synopsys translate_off
+defparam \datab[14]~input .bus_hold = "false";
+defparam \datab[14]~input .listen_to_nsleep_signal = "false";
+defparam \datab[14]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X24_Y0_N22
+fiftyfivenm_io_ibuf \datab[15]~input (
+	.i(datab[15]),
+	.ibar(gnd),
+	.nsleep(vcc),
+	.o(\datab[15]~input_o ));
+// synopsys translate_off
+defparam \datab[15]~input .bus_hold = "false";
+defparam \datab[15]~input .listen_to_nsleep_signal = "false";
+defparam \datab[15]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: DSPMULT_X28_Y4_N0
+fiftyfivenm_mac_mult \altmult_accum_component|auto_generated|ded_mult1|mac_mult3 (
+	.signa(gnd),
+	.signb(gnd),
+	.clk(\clock0~inputclkctrl_outclk ),
+	.aclr(gnd),
+	.ena(vcc),
+	.dataa({\dataa[15]~input_o ,\dataa[14]~input_o ,\dataa[13]~input_o ,\dataa[12]~input_o ,\dataa[11]~input_o ,\dataa[10]~input_o ,\dataa[9]~input_o ,\dataa[8]~input_o ,\dataa[7]~input_o ,\dataa[6]~input_o ,\dataa[5]~input_o ,\dataa[4]~input_o ,\dataa[3]~input_o ,
+\dataa[2]~input_o ,\dataa[1]~input_o ,\dataa[0]~input_o ,gnd,gnd}),
+	.datab({\datab[15]~input_o ,\datab[14]~input_o ,\datab[13]~input_o ,\datab[12]~input_o ,\datab[11]~input_o ,\datab[10]~input_o ,\datab[9]~input_o ,\datab[8]~input_o ,\datab[7]~input_o ,\datab[6]~input_o ,\datab[5]~input_o ,\datab[4]~input_o ,\datab[3]~input_o ,
+\datab[2]~input_o ,\datab[1]~input_o ,\datab[0]~input_o ,gnd,gnd}),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.dataout(\altmult_accum_component|auto_generated|ded_mult1|mac_mult3_DATAOUT_bus ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|ded_mult1|mac_mult3 .dataa_clock = "0";
+defparam \altmult_accum_component|auto_generated|ded_mult1|mac_mult3 .dataa_width = 18;
+defparam \altmult_accum_component|auto_generated|ded_mult1|mac_mult3 .datab_clock = "0";
+defparam \altmult_accum_component|auto_generated|ded_mult1|mac_mult3 .datab_width = 18;
+defparam \altmult_accum_component|auto_generated|ded_mult1|mac_mult3 .signa_clock = "none";
+defparam \altmult_accum_component|auto_generated|ded_mult1|mac_mult3 .signb_clock = "none";
+// synopsys translate_on
+
+// Location: DSPOUT_X28_Y4_N2
+fiftyfivenm_mac_out \altmult_accum_component|auto_generated|ded_mult1|mac_out4 (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.aclr(gnd),
+	.ena(vcc),
+	.dataa({\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT31 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT30 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT29 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT28 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT27 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT26 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT25 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT24 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT23 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT22 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT21 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT20 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT19 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT18 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT17 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT16 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT15 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT14 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT13 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT12 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT11 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT10 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT9 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT8 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT7 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT6 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT5 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT4 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT3 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT2 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~DATAOUT1 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~dataout ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~7 ,
+\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~6 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~5 ,\altmult_accum_component|auto_generated|ded_mult1|mac_mult3~4 }),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.dataout(\altmult_accum_component|auto_generated|ded_mult1|mac_out4_DATAOUT_bus ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|ded_mult1|mac_out4 .dataa_width = 36;
+defparam \altmult_accum_component|auto_generated|ded_mult1|mac_out4 .output_clock = "0";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y4_N16
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [0] = (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~dataout  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [0] $ (VCC))) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~dataout  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [0] & VCC))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~dataout  & \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [0]))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~dataout ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [0]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [0]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0] .lut_mask = 16'h6688;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y4_N17
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[0] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [0]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [0]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[0] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[0] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y4_N18
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [1] = (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [1] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT1  & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT1  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [1] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT1  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT1  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [1] & (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT1  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT )) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [1] & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT1 ))))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [1]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT1 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[0]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [1]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y4_N19
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[1] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [1]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [1]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[1] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[1] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y4_N20
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [2] = ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [2] $ (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT2  $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [2] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT2 ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1]~COUT ))) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [2] & (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT2  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [2]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT2 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[1]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [2]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y4_N21
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[2] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [2]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [2]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[2] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[2] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y4_N22
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [3] = (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT3  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [3] & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [3] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT3  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [3] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [3] & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT3  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [3] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT )) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT3  & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [3]))))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT3 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [3]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[2]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [3]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y4_N23
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[3] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [3]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [3]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[3] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[3] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y4_N24
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [4] = ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [4] $ (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT4  $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [4] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT4 ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3]~COUT ))) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [4] & (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT4  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [4]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT4 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[3]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [4]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y4_N25
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[4] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [4]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [4]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[4] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[4] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y4_N26
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [5] = (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [5] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT5  & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT5  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [5] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT5  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT5  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [5] & (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT5  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT )) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [5] & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT5 ))))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [5]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT5 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[4]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [5]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y4_N27
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[5] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [5]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [5]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[5] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[5] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y4_N28
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [6] = ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT6  $ (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [6] $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT6  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [6]) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5]~COUT ))) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT6  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [6] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT6 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [6]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[5]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [6]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y4_N29
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[6] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [6]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [6]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[6] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[6] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y4_N30
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [7] = (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT7  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [7] & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [7] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT7  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [7] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [7] & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT7  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [7] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT )) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT7  & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [7]))))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT7 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [7]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[6]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [7]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y4_N31
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[7] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [7]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [7]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[7] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[7] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N0
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [8] = ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT8  $ (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [8] $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT8  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [8]) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7]~COUT ))) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT8  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [8] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT8 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [8]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[7]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [8]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N1
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[8] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [8]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [8]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[8] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[8] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N2
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [9] = (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT9  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [9] & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [9] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT9  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [9] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [9] & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT9  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [9] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT )) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT9  & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [9]))))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT9 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [9]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[8]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [9]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N3
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[9] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [9]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [9]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[9] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[9] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N4
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [10] = ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT10  $ (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [10] $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT10  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [10]) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9]~COUT ))) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT10  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [10] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT10 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [10]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[9]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [10]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N5
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[10] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [10]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [10]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[10] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[10] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N6
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [11] = (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [11] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT11  & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT11  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [11] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT11  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT11  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [11] & (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT11  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT )) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [11] & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT11 ))))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [11]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT11 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[10]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [11]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N7
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[11] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [11]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [11]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[11] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[11] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N8
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [12] = ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [12] $ (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT12  $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [12] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT12 ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11]~COUT ))) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [12] & (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT12  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [12]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT12 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[11]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [12]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N9
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[12] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [12]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [12]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[12] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[12] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N10
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [13] = (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [13] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT13  & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT13  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [13] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT13  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT13  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [13] & (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT13  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT )) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [13] & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT13 ))))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [13]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT13 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[12]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [13]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N11
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[13] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [13]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [13]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[13] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[13] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N12
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [14] = ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [14] $ (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT14  $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [14] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT14 ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13]~COUT ))) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [14] & (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT14  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [14]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT14 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[13]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [14]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N13
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[14] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [14]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [14]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[14] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[14] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N14
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [15] = (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT15  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [15] & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [15] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT15  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [15] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [15] & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT15  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [15] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT )) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT15  & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [15]))))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT15 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [15]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[14]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [15]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N15
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[15] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [15]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [15]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[15] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[15] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N16
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [16] = ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [16] $ (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT16  $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [16] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT16 ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15]~COUT ))) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [16] & (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT16  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [16]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT16 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[15]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [16]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N17
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[16] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [16]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [16]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[16] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[16] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N18
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [17] = (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT17  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [17] & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [17] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT17  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [17] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [17] & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT17  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [17] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT )) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT17  & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [17]))))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT17 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [17]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[16]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [17]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N19
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[17] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [17]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [17]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[17] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[17] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N20
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [18] = ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT18  $ (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [18] $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT18  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [18]) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17]~COUT ))) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT18  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [18] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT18 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [18]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[17]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [18]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N21
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[18] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [18]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [18]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[18] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[18] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N22
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [19] = (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [19] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT19  & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT19  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [19] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT19  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT19  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [19] & (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT19  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT )) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [19] & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT19 ))))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [19]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT19 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[18]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [19]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N23
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[19] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [19]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [19]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[19] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[19] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N24
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [20] = ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [20] $ (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT20  $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [20] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT20 ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19]~COUT ))) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [20] & (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT20  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [20]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT20 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[19]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [20]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N25
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[20] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [20]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [20]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[20] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[20] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N26
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [21] = (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [21] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT21  & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT21  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [21] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT21  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT21  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [21] & (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT21  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT )) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [21] & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT21 ))))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [21]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT21 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[20]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [21]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N27
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[21] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [21]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [21]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[21] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[21] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N28
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [22] = ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT22  $ (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [22] $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT22  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [22]) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21]~COUT ))) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT22  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [22] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT22 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [22]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[21]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [22]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N29
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[22] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [22]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [22]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[22] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[22] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y3_N30
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [23] = (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [23] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT23  & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT23  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [23] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT23  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT23  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [23] & (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT23  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT )) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [23] & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT23 ))))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [23]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT23 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[22]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [23]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y3_N31
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[23] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [23]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [23]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[23] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[23] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y2_N0
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [24] = ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT24  $ (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [24] $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT24  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [24]) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23]~COUT ))) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT24  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [24] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT24 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [24]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[23]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [24]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y2_N1
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[24] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [24]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [24]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[24] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[24] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y2_N2
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [25] = (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [25] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT25  & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT25  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [25] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT25  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT25  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [25] & (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT25  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT )) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [25] & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT25 ))))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [25]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT25 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[24]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [25]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y2_N3
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[25] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [25]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [25]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[25] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[25] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y2_N4
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [26] = ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT26  $ (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [26] $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT26  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [26]) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25]~COUT ))) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT26  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [26] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT26 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [26]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[25]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [26]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y2_N5
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[26] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [26]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [26]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[26] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[26] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y2_N6
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [27] = (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [27] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT27  & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT27  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [27] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT27  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT27  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [27] & (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT27  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT )) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [27] & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT27 ))))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [27]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT27 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[26]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [27]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y2_N7
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[27] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [27]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [27]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[27] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[27] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y2_N8
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [28] = ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [28] $ (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT28  $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT  = CARRY((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [28] & ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT28 ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27]~COUT ))) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [28] & (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT28  & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [28]),
+	.datab(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT28 ),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[27]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [28]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y2_N9
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[28] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [28]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [28]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[28] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[28] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y2_N10
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [29] = (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT29  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [29] & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [29] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT29  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [29] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [29] & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT29  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [29] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT )) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT29  & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [29]))))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT29 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [29]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[28]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [29]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y2_N11
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[29] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [29]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [29]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[29] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[29] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y2_N12
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [30] = ((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT30  $ (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [30] $ 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29]~COUT )))) # (GND)
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT30  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [30]) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29]~COUT ))) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT30  & (\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [30] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29]~COUT )))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT30 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [30]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[29]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [30]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30] .lut_mask = 16'h698E;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y2_N13
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[30] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [30]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [30]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[30] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[30] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y2_N14
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[31] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [31] = (\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT31  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [31] & 
+// (\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT  & VCC)) # (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [31] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT )))) # 
+// (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT31  & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [31] & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT )) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [31] & ((\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT ) # (GND)))))
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[31]~COUT  = CARRY((\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT31  & (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [31] & 
+// !\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT )) # (!\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT31  & ((!\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT ) # 
+// (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [31]))))
+
+	.dataa(\altmult_accum_component|auto_generated|ded_mult1|mac_out4~DATAOUT31 ),
+	.datab(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [31]),
+	.datac(gnd),
+	.datad(vcc),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[30]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [31]),
+	.cout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[31]~COUT ));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[31] .lut_mask = 16'h9617;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[31] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y2_N15
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[31] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [31]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [31]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[31] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[31] .power_up = "low";
+// synopsys translate_on
+
+// Location: LCCOMB_X27_Y2_N16
+fiftyfivenm_lcell_comb \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[32] (
+// Equation(s):
+// \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [32] = \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[31]~COUT  $ (!\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [32])
+
+	.dataa(gnd),
+	.datab(gnd),
+	.datac(gnd),
+	.datad(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [32]),
+	.cin(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[31]~COUT ),
+	.combout(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [32]),
+	.cout());
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[32] .lut_mask = 16'hF00F;
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_cella[32] .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: FF_X27_Y2_N17
+dffeas \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[32] (
+	.clk(\clock0~inputclkctrl_outclk ),
+	.d(\altmult_accum_component|auto_generated|zaccum2|accum|acc_cella [32]),
+	.asdata(vcc),
+	.clrn(vcc),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa [32]),
+	.prn(vcc));
+// synopsys translate_off
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[32] .is_wysiwyg = "true";
+defparam \altmult_accum_component|auto_generated|zaccum2|accum|acc_ffa[32] .power_up = "low";
+// synopsys translate_on
+
+// Location: UNVM_X0_Y40_N40
+fiftyfivenm_unvm \~QUARTUS_CREATED_UNVM~ (
+	.arclk(vcc),
+	.arshft(vcc),
+	.drclk(vcc),
+	.drshft(vcc),
+	.drdin(vcc),
+	.nprogram(vcc),
+	.nerase(vcc),
+	.nosc_ena(\~QUARTUS_CREATED_GND~I_combout ),
+	.par_en(vcc),
+	.xe_ye(\~QUARTUS_CREATED_GND~I_combout ),
+	.se(\~QUARTUS_CREATED_GND~I_combout ),
+	.ardin(23'b11111111111111111111111),
+	.busy(\~QUARTUS_CREATED_UNVM~~busy ),
+	.osc(),
+	.bgpbusy(),
+	.sp_pass(),
+	.se_pass(),
+	.drdout());
+// synopsys translate_off
+defparam \~QUARTUS_CREATED_UNVM~ .addr_range1_end_addr = -1;
+defparam \~QUARTUS_CREATED_UNVM~ .addr_range1_offset = -1;
+defparam \~QUARTUS_CREATED_UNVM~ .addr_range2_end_addr = -1;
+defparam \~QUARTUS_CREATED_UNVM~ .addr_range2_offset = -1;
+defparam \~QUARTUS_CREATED_UNVM~ .addr_range3_offset = -1;
+defparam \~QUARTUS_CREATED_UNVM~ .is_compressed_image = "false";
+defparam \~QUARTUS_CREATED_UNVM~ .is_dual_boot = "false";
+defparam \~QUARTUS_CREATED_UNVM~ .is_eram_skip = "false";
+defparam \~QUARTUS_CREATED_UNVM~ .max_ufm_valid_addr = -1;
+defparam \~QUARTUS_CREATED_UNVM~ .max_valid_addr = -1;
+defparam \~QUARTUS_CREATED_UNVM~ .min_ufm_valid_addr = -1;
+defparam \~QUARTUS_CREATED_UNVM~ .min_valid_addr = -1;
+defparam \~QUARTUS_CREATED_UNVM~ .part_name = "quartus_created_unvm";
+defparam \~QUARTUS_CREATED_UNVM~ .reserve_block = "true";
+// synopsys translate_on
+
+// Location: ADCBLOCK_X43_Y52_N0
+fiftyfivenm_adcblock \~QUARTUS_CREATED_ADC1~ (
+	.soc(\~QUARTUS_CREATED_GND~I_combout ),
+	.usr_pwd(vcc),
+	.tsen(\~QUARTUS_CREATED_GND~I_combout ),
+	.clkin_from_pll_c0(gnd),
+	.chsel({\~QUARTUS_CREATED_GND~I_combout ,\~QUARTUS_CREATED_GND~I_combout ,\~QUARTUS_CREATED_GND~I_combout ,\~QUARTUS_CREATED_GND~I_combout ,\~QUARTUS_CREATED_GND~I_combout }),
+	.eoc(\~QUARTUS_CREATED_ADC1~~eoc ),
+	.dout());
+// synopsys translate_off
+defparam \~QUARTUS_CREATED_ADC1~ .analog_input_pin_mask = 0;
+defparam \~QUARTUS_CREATED_ADC1~ .clkdiv = 1;
+defparam \~QUARTUS_CREATED_ADC1~ .device_partname_fivechar_prefix = "none";
+defparam \~QUARTUS_CREATED_ADC1~ .is_this_first_or_second_adc = 1;
+defparam \~QUARTUS_CREATED_ADC1~ .prescalar = 0;
+defparam \~QUARTUS_CREATED_ADC1~ .pwd = 1;
+defparam \~QUARTUS_CREATED_ADC1~ .refsel = 0;
+defparam \~QUARTUS_CREATED_ADC1~ .reserve_block = "true";
+defparam \~QUARTUS_CREATED_ADC1~ .testbits = 66;
+defparam \~QUARTUS_CREATED_ADC1~ .tsclkdiv = 1;
+defparam \~QUARTUS_CREATED_ADC1~ .tsclksel = 0;
+// synopsys translate_on
+
+// Location: ADCBLOCK_X43_Y51_N0
+fiftyfivenm_adcblock \~QUARTUS_CREATED_ADC2~ (
+	.soc(\~QUARTUS_CREATED_GND~I_combout ),
+	.usr_pwd(vcc),
+	.tsen(\~QUARTUS_CREATED_GND~I_combout ),
+	.clkin_from_pll_c0(gnd),
+	.chsel({\~QUARTUS_CREATED_GND~I_combout ,\~QUARTUS_CREATED_GND~I_combout ,\~QUARTUS_CREATED_GND~I_combout ,\~QUARTUS_CREATED_GND~I_combout ,\~QUARTUS_CREATED_GND~I_combout }),
+	.eoc(\~QUARTUS_CREATED_ADC2~~eoc ),
+	.dout());
+// synopsys translate_off
+defparam \~QUARTUS_CREATED_ADC2~ .analog_input_pin_mask = 0;
+defparam \~QUARTUS_CREATED_ADC2~ .clkdiv = 1;
+defparam \~QUARTUS_CREATED_ADC2~ .device_partname_fivechar_prefix = "none";
+defparam \~QUARTUS_CREATED_ADC2~ .is_this_first_or_second_adc = 2;
+defparam \~QUARTUS_CREATED_ADC2~ .prescalar = 0;
+defparam \~QUARTUS_CREATED_ADC2~ .pwd = 1;
+defparam \~QUARTUS_CREATED_ADC2~ .refsel = 0;
+defparam \~QUARTUS_CREATED_ADC2~ .reserve_block = "true";
+defparam \~QUARTUS_CREATED_ADC2~ .testbits = 66;
+defparam \~QUARTUS_CREATED_ADC2~ .tsclkdiv = 1;
+defparam \~QUARTUS_CREATED_ADC2~ .tsclksel = 0;
+// synopsys translate_on
+
+assign result[0] = \result[0]~output_o ;
+
+assign result[1] = \result[1]~output_o ;
+
+assign result[2] = \result[2]~output_o ;
+
+assign result[3] = \result[3]~output_o ;
+
+assign result[4] = \result[4]~output_o ;
+
+assign result[5] = \result[5]~output_o ;
+
+assign result[6] = \result[6]~output_o ;
+
+assign result[7] = \result[7]~output_o ;
+
+assign result[8] = \result[8]~output_o ;
+
+assign result[9] = \result[9]~output_o ;
+
+assign result[10] = \result[10]~output_o ;
+
+assign result[11] = \result[11]~output_o ;
+
+assign result[12] = \result[12]~output_o ;
+
+assign result[13] = \result[13]~output_o ;
+
+assign result[14] = \result[14]~output_o ;
+
+assign result[15] = \result[15]~output_o ;
+
+assign result[16] = \result[16]~output_o ;
+
+assign result[17] = \result[17]~output_o ;
+
+assign result[18] = \result[18]~output_o ;
+
+assign result[19] = \result[19]~output_o ;
+
+assign result[20] = \result[20]~output_o ;
+
+assign result[21] = \result[21]~output_o ;
+
+assign result[22] = \result[22]~output_o ;
+
+assign result[23] = \result[23]~output_o ;
+
+assign result[24] = \result[24]~output_o ;
+
+assign result[25] = \result[25]~output_o ;
+
+assign result[26] = \result[26]~output_o ;
+
+assign result[27] = \result[27]~output_o ;
+
+assign result[28] = \result[28]~output_o ;
+
+assign result[29] = \result[29]~output_o ;
+
+assign result[30] = \result[30]~output_o ;
+
+assign result[31] = \result[31]~output_o ;
+
+assign result[32] = \result[32]~output_o ;
+
+endmodule
+
+module hard_block (
+
+	devpor,
+	devclrn,
+	devoe);
+
+// Design Ports Information
+// ~ALTERA_TMS~	=>  Location: PIN_H2,	 I/O Standard: 2.5 V Schmitt Trigger,	 Current Strength: Default
+// ~ALTERA_TCK~	=>  Location: PIN_G2,	 I/O Standard: 2.5 V Schmitt Trigger,	 Current Strength: Default
+// ~ALTERA_TDI~	=>  Location: PIN_L4,	 I/O Standard: 2.5 V Schmitt Trigger,	 Current Strength: Default
+// ~ALTERA_TDO~	=>  Location: PIN_M5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// ~ALTERA_CONFIG_SEL~	=>  Location: PIN_H10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// ~ALTERA_nCONFIG~	=>  Location: PIN_H9,	 I/O Standard: 2.5 V Schmitt Trigger,	 Current Strength: Default
+// ~ALTERA_nSTATUS~	=>  Location: PIN_G9,	 I/O Standard: 2.5 V Schmitt Trigger,	 Current Strength: Default
+// ~ALTERA_CONF_DONE~	=>  Location: PIN_F8,	 I/O Standard: 2.5 V Schmitt Trigger,	 Current Strength: Default
+
+input 	devpor;
+input 	devclrn;
+input 	devoe;
+
+wire gnd;
+wire vcc;
+wire unknown;
+
+assign gnd = 1'b0;
+assign vcc = 1'b1;
+assign unknown = 1'bx;
+
+wire \~ALTERA_TMS~~padout ;
+wire \~ALTERA_TCK~~padout ;
+wire \~ALTERA_TDI~~padout ;
+wire \~ALTERA_CONFIG_SEL~~padout ;
+wire \~ALTERA_nCONFIG~~padout ;
+wire \~ALTERA_nSTATUS~~padout ;
+wire \~ALTERA_CONF_DONE~~padout ;
+wire \~ALTERA_TMS~~ibuf_o ;
+wire \~ALTERA_TCK~~ibuf_o ;
+wire \~ALTERA_TDI~~ibuf_o ;
+wire \~ALTERA_CONFIG_SEL~~ibuf_o ;
+wire \~ALTERA_nCONFIG~~ibuf_o ;
+wire \~ALTERA_nSTATUS~~ibuf_o ;
+wire \~ALTERA_CONF_DONE~~ibuf_o ;
+
+
+endmodule
